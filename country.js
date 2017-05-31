@@ -2,8 +2,8 @@
 (function(){
 	var getJson = function(url,successHandler){
 		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open('GET',url,true);
 
+		xmlhttp.open('GET',url,true);
 		xmlhttp.onreadystatechange = function(){
 			if (xmlhttp.readyState === 4 && xmlhttp.status ===200){
 				successHandler(xmlhttp.response);
@@ -12,20 +12,22 @@
 
 		xmlhttp.send();
 	}
+
+
 	getJson('https://restcountries.eu/rest/v2/all', function(data){
 		var data = JSON.parse(data);
 		var myOl = document.querySelector('#collapse-1 .panel-body');
 		var group = [
-		'A-B-C',
-		'D-E-F',
-		'G-H-I',
-		'J-K-L',
-		'M-N-O',
-		'P-Q-R',
-		'S-T-U',
-		'V-W-X',
-		'Y-Z'
-		];
+					'A-B-C',
+					'D-E-F',
+					'G-H-I',
+					'J-K-L',
+					'M-N-O',
+					'P-Q-R',
+					'S-T-U',
+					'V-W-X',
+					'Y-Z'
+					];
 		var b;
 		var index;
 		var nameA;
@@ -34,12 +36,8 @@
 		var region;
 		var timezones;
 		var block = document.querySelector('.panel');
-
-
-/*		var h4 = document.querySelector('.panel-title');
-h4.style.cssText+="font-weight:bold;text-align:center;color:grey;";*/
-
 		var datagroups = []
+
 		for (var i = 0; i < group.length; i++) {
 			datagroups.push([]);
 			nameA = group[i];
@@ -54,7 +52,6 @@ h4.style.cssText+="font-weight:bold;text-align:center;color:grey;";*/
 								
 							"</div>"+
 						"</div>";
-
 			index = [i];
 			block.insertAdjacentHTML('beforeEnd',str);	
 		}
@@ -62,27 +59,26 @@ h4.style.cssText+="font-weight:bold;text-align:center;color:grey;";*/
 		for (var i = 0; i < data.length; i++) {
 			var country = data[i];
 			var countryName = country.name;
-		/*	console.log('data[i]',data[i]);
-			console.log('countryName',countryName);*/
 			var countryGroupLetter = countryName.charAt(0).toUpperCase();
-				for (var b =0; b < group.length;  b++) {
-			  
-					if(group[b].indexOf(countryGroupLetter) > -1){
-						datagroups[b].push(country);
-						break;
-					}
-				}			
+
+			for (var b =0; b < group.length;  b++) {
+		  
+				if(group[b].indexOf(countryGroupLetter) > -1){
+					datagroups[b].push(country);
+					break;
+				}
+			}			
 		}
 		console.log('datagroups',datagroups);
 
-			var blockAll = document.querySelectorAll('.panel-body');
+		var blockAll = document.querySelectorAll('.panel-body');
 
-
+		
 		for(var i = 0; i< datagroups.length;  i++){
-			console.log('datagroups.length',datagroups.length);//9
-			
+			console.log('datagroups.length',datagroups.length);
 			var block = datagroups[i];
 			console.log('block',block);
+
 			for (var s = 0; s < block.length;  s++) {
 				nameCountryGot = block[s].name;
 				b = block[s].flag;
@@ -104,30 +100,7 @@ h4.style.cssText+="font-weight:bold;text-align:center;color:grey;";*/
 				console.log('block[s]',block[s].name);
 				console.log('block[s]',block[s].timezones[0]);
 				blockAll[i].insertAdjacentHTML('beforeEnd',str);
-				/*var flagAll = document.querySelectorAll('.flag');
-			    console.log('flag',flagAll);
-			    var flag =flagAll[i];
-				flag.style.cssText+="width:50px;height:25px;"*/
-
-			}
-		}
-		
-	
-
-			// group.forEach(function(text, i) {
-				// 	var countryGroupLetter = countryName.charAt(0).toUpperCase()
-				// 	if (text.indexOf(countryGroupLetter) > -1) {
-				// 		datagroups[i].push(country);
-				// 		return false;
-				// 	}
-				// })
-			
-			// 	var myLi = document.createElement('li');	
-			// 	myLi.innerHTML = country;
-			// 	console.log('myLi',myLi);
-			// 	myOl.appendChild(myLi);	
-			// }
-	}
-	)
-
+			}	
+		}		
+	})
 })()
