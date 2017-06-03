@@ -2,9 +2,10 @@
 (function(){
 	var getJson = function(url,successHandler){
 		var xmlhttp = new XMLHttpRequest();
-
 		xmlhttp.open('GET',url,true);
+
 		xmlhttp.onreadystatechange = function(){
+
 			if (xmlhttp.readyState === 4 && xmlhttp.status ===200){
 				successHandler(xmlhttp.response);
 			}
@@ -16,7 +17,6 @@
 
 	getJson('https://restcountries.eu/rest/v2/all', function(data){
 		var data = JSON.parse(data);
-		var myOl = document.querySelector('#collapse-1 .panel-body');
 		var group = [
 					'A-B-C',
 					'D-E-F',
@@ -41,7 +41,6 @@
 		for (var i = 0; i < group.length; i++) {
 			datagroups.push([]);
 			nameA = group[i];
-
 			var str = "<div class='panel-heading' role='tab' id='heading-1"+index+"'>"+
 							"<h4 class='panel-title'>"+
 								"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#collapse-1"+index+"' aria-expanded='true' aria-controls='collapse-1"+index+"'>"+nameA+"</a>"+	
@@ -52,6 +51,7 @@
 								
 							"</div>"+
 						"</div>";
+
 			index = [i];
 			block.insertAdjacentHTML('beforeEnd',str);	
 		}
@@ -73,10 +73,10 @@
 
 		var blockAll = document.querySelectorAll('.panel-body');
 
-		
 		for(var i = 0; i< datagroups.length;  i++){
-			console.log('datagroups.length',datagroups.length);
 			var block = datagroups[i];
+
+			console.log('datagroups.length',datagroups.length);
 			console.log('block',block);
 
 			for (var s = 0; s < block.length;  s++) {
@@ -85,6 +85,7 @@
 				population = block[s].population;
 				region = block[s].region;
 				timezones =block[s].timezones[0];
+
 				var str ="<div class='container'>"+
 							"<div>"+
 								"<img src="+b+" alt="+nameCountryGot+" class='flag' />&nbsp;"+
@@ -99,6 +100,7 @@
 						"</div>"+
 				console.log('block[s]',block[s].name);
 				console.log('block[s]',block[s].timezones[0]);
+
 				blockAll[i].insertAdjacentHTML('beforeEnd',str);
 			}	
 		}		
